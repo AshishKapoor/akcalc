@@ -13,6 +13,10 @@ import Foundation
 class InterfaceController: WKInterfaceController {
 
     var labelString: String = ""
+    var oldValue: Int = 0;
+    var newValue: Int = 0;
+    var total: Int = 0;
+    var operation: String = ""
     
     @IBOutlet var valueLabel: WKInterfaceLabel!
     @IBAction func tappedZero(){tappedNumber(num: 0)}
@@ -27,19 +31,45 @@ class InterfaceController: WKInterfaceController {
     @IBAction func tappedNine(){tappedNumber(num: 9)}
     
     @IBAction func tappedPlus() {
-        print("Tapped Plus");
+        guard let label = Int(labelString) else { return }
+        if total == 0 {
+            oldValue = Int(label)
+        } else {
+            oldValue = total
+        }
+        valueLabel.setText("0")
+        labelString = ""
+        operation = "Plus"
     }
     
     @IBAction func tappedMinus() {
-        print("Tapped Minus");
+        guard let label = Int(labelString) else { return }
+        if total == 0 {
+            oldValue = Int(label)
+        } else {
+            oldValue = total
+        }
+        oldValue = Int(label)
+        valueLabel.setText("0")
+        labelString = ""
+        operation = "Minus"
     }
     
     @IBAction func tappedClear() {
-        print("Tapped Clear");
+        valueLabel.setText("0")
+        labelString = ""
     }
     
     @IBAction func tappedEquals() {
-        print("Tapped Equals");
+        guard let label = Int(labelString) else { return }
+
+        if operation == "Plus" {
+            total = oldValue + Int(label)
+        } else if operation == "Minus" {
+            total = oldValue - Int(label)
+        }
+        valueLabel.setText(String(total))
+        labelString = String(total)
     }
     
     func tappedNumber(num: Int) {
@@ -49,7 +79,6 @@ class InterfaceController: WKInterfaceController {
     
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
-        
         // Configure interface objects here.
     }
     
