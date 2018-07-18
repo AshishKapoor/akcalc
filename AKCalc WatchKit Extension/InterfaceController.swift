@@ -12,6 +12,8 @@ import Foundation
 
 class InterfaceController: WKInterfaceController {
 
+    var labelString: String = ""
+    
     @IBOutlet var valueLabel: WKInterfaceLabel!
     @IBAction func tappedZero(){tappedNumber(num: 0)}
     @IBAction func tappedOne(){tappedNumber(num: 1)}
@@ -41,7 +43,8 @@ class InterfaceController: WKInterfaceController {
     }
     
     func tappedNumber(num: Int) {
-        print("Tapped: \(num)");
+        labelString = labelString.appending("\(num)")
+        valueLabel.setText(labelString)
     }
     
     override func awake(withContext context: Any?) {
