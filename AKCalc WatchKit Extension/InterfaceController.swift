@@ -14,7 +14,6 @@ class InterfaceController: WKInterfaceController {
 
     var labelString: String = ""
     var oldValue: Int = 0;
-    var newValue: Int = 0;
     var total: Int = 0;
     var operation: String = ""
     
@@ -58,6 +57,8 @@ class InterfaceController: WKInterfaceController {
     @IBAction func tappedClear() {
         valueLabel.setText("0")
         labelString = ""
+        total = 0;
+        oldValue = 0;
     }
     
     @IBAction func tappedEquals() {
