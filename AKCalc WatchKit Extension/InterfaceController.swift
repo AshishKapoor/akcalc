@@ -74,7 +74,15 @@ class InterfaceController: WKInterfaceController {
     
     func tappedNumber(num: Int) {
         labelString = labelString.appending("\(num)")
-        valueLabel.setText(labelString)
+        checkNumberLimit()
+    }
+    
+    func checkNumberLimit() {
+        guard let labelValue: Int64 = Int64(labelString) else {
+            valueLabel.setText("NA")
+            return
+        }
+        valueLabel.setText("\(labelValue)")
     }
     
     override func awake(withContext context: Any?) {
